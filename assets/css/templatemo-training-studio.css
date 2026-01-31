@@ -16,7 +16,7 @@ Table of contents
 05. banner
 06. features
 07. testimonials
-08. contact
+08. contacto
 09. footer
 10. preloader
 11. search
@@ -549,6 +549,53 @@ a.card-link:hover {
 }
 
 @media (max-width: 767px) {
+  /* 1. Mantenemos el fondo fijo en su lugar */
+  .main-banner {
+    height: auto !important;
+    min-height: 100vh;
+    display: block !important;
+  }
+
+  /* 2. Aquí está el truco: usamos PADDING en lugar de MARGIN */
+  .video-overlay.header-text {
+    padding-top: 100px !important; /* Un poco menos de espacio arriba */
+    padding-bottom: 30px !important;
+    height: auto !important;
+  }
+
+  /* 3. Ajustamos la caja de los textos */
+  .caption {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 90% !important;
+    margin: 0 auto !important;
+    text-align: center !important; /* Centra todos los textos */
+    padding: 0 10px !important; /* Evita que las letras toquen los bordes de la pantalla */
+  }
+
+  /* 4. Hacemos que los textos no sean tan gigantes en móvil */
+  .caption h6 {
+    font-size: 13px !important; /* Texto un poco más pequeño para ganar espacio */
+    line-height: 1.4 !important;
+    margin-bottom: 10px !important;
+    text-align: justify; /* Si prefieres justificar, usa esto, pero el centrado suele verse mejor en banners */
+    text-align-last: center; /* Esto hace que la última línea del párrafo justificado se centre */
+  }
+
+  .caption h2 {
+    font-size: 18px !important; /* Título más compacto */
+    margin: 15px 0 !important;
+  }
+
+  /* Ajuste para la imagen de Yape en móvil */
+  /* SOLUCIÓN AL YAPE: Reducimos el tamaño de la imagen */
+  .main-button img {
+    width: 140px !important; /* Antes era 250px, ahora es más manejable en móvil */
+    height: auto;
+    margin: 10px 0 !important;
+  }
   .header-area .main-nav .logo {
     color: #1e1e1e;
   }
@@ -779,7 +826,6 @@ features
   color: yellow;
 }
 
-
 /* PRUEBAAAAAAAAAAAAAA */
 .card-link {
   display: flex;
@@ -897,7 +943,7 @@ subscribe
 
 /*
 --------------------------------------------
-Our Classes
+Portal Movil Osiptel
 --------------------------------------------
 */
 
@@ -1446,9 +1492,9 @@ responsive
   }
   .grid-links {
     /* Forzamos una sola columna que ocupa todo el ancho disponible */
-    grid-template-columns: 1fr !important; 
+    grid-template-columns: 1fr !important;
     /* Eliminamos márgenes internos que puedan estar empujando el contenido */
-    padding: 0 15px !important; 
+    padding: 0 15px !important;
     gap: 15px;
     justify-items: center; /* Centra los items si no ocupan el 100% */
   }
