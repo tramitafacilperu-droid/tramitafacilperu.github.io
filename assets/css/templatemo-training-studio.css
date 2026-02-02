@@ -710,12 +710,6 @@ a.card-link:hover {
   .header-area .main-nav .nav li.submenu:focus ul {
     height: 0px;
   }
-}
-
-@media (min-width: 767px) {
-  .header-area .main-nav .nav {
-    display: flex !important;  
-  }
   .logo-full {
         display: none !important; /* Escondemos el nombre largo en celular */
     }
@@ -724,8 +718,17 @@ a.card-link:hover {
         display: inline-block !important; /* ¡Aparece TFP! */
         font-weight: bold;
         letter-spacing: 2px;
-        font-size: 24px; /* Ajusta el tamaño para que se vea bien junto al menú */
+        font-size: 30px; /* Ajusta el tamaño para que se vea bien junto al menú */
     }
+    header .logo {
+        padding-left: 15px !important;
+    }
+}
+
+@media (min-width: 767px) {
+  .header-area .main-nav .nav {
+    display: flex !important;  
+  }  
 }
 
 .logo-short {
