@@ -262,7 +262,9 @@ body {
 .main-button a:hover {
   background-color: #f9735b;
 }
-
+.espacio{
+  margin-bottom: 80px;
+}
 /* 
 ---------------------------------------------
 header
@@ -558,8 +560,8 @@ a.card-link:hover {
 
   /* 2. Aquí está el truco: usamos PADDING en lugar de MARGIN */
   .video-overlay.header-text {
-    padding-top: 100px !important; /* Un poco menos de espacio arriba */
-    padding-bottom: 30px !important;
+    padding-top: 130px !important; /* Un poco menos de espacio arriba */
+    padding-bottom: 60px !important;
     height: auto !important;
   }
 
@@ -577,24 +579,26 @@ a.card-link:hover {
 
   /* 4. Hacemos que los textos no sean tan gigantes en móvil */
   .caption h6 {
-    font-size: 13px !important; /* Texto un poco más pequeño para ganar espacio */
-    line-height: 1.4 !important;
+    font-size: 14px !important; /* Texto un poco más pequeño para ganar espacio */
+    line-height: 1.5 !important;
     margin-bottom: 10px !important;
     text-align: justify; /* Si prefieres justificar, usa esto, pero el centrado suele verse mejor en banners */
     text-align-last: center; /* Esto hace que la última línea del párrafo justificado se centre */
   }
 
   .caption h2 {
-    font-size: 18px !important; /* Título más compacto */
+    font-size: 24px !important; /* Título más compacto */
     margin: 15px 0 !important;
+    margin-top: 20px !important;
   }
 
   /* Ajuste para la imagen de Yape en móvil */
   /* SOLUCIÓN AL YAPE: Reducimos el tamaño de la imagen */
   .main-button img {
-    width: 140px !important; /* Antes era 250px, ahora es más manejable en móvil */
+    width: 160px !important; /* Antes era 250px, ahora es más manejable en móvil */
     height: auto;
     margin: 10px 0 !important;
+    margin-top: 15px !important;
   }
   .header-area .main-nav .logo {
     color: #1e1e1e;
@@ -710,8 +714,26 @@ a.card-link:hover {
 
 @media (min-width: 767px) {
   .header-area .main-nav .nav {
-    display: flex !important;
+    display: flex !important;  
   }
+  .logo-full {
+        display: none !important; /* Escondemos el nombre largo en celular */
+    }
+
+    .logo-short {
+        display: inline-block !important; /* ¡Aparece TFP! */
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-size: 24px; /* Ajusta el tamaño para que se vea bien junto al menú */
+    }
+}
+
+.logo-short {
+    display: none; /* Escondemos el nombre corto en la computadora */
+}
+
+.logo-full {
+    display: inline-block; /* Mostramos el nombre completo */
 }
 
 /* 
@@ -724,7 +746,7 @@ banner
   position: relative;
 }
 
-#bg-video {
+#bg-img {
   min-width: 100%;
   min-height: 100vh;
   max-width: 100%;
@@ -733,7 +755,7 @@ banner
   z-index: -1;
 }
 
-#bg-video::-webkit-media-controls {
+#bg-img::-webkit-media-controls {
   display: none !important;
 }
 
@@ -749,27 +771,32 @@ banner
 .main-banner .caption {
   text-align: center;
   position: absolute;
-  width: 80%;
+  width: 70%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  margin: 0 auto;
+  padding-top: 50px; /* Le damos aire arriba */
 }
 
 .main-banner .caption h6 {
   margin-top: 0px;
-  font-size: 14px;
+  font-size: 18px;
   /* text-transform: uppercase; */
   /* font-weight: 800; */
   color: #fff;
   letter-spacing: 0.5px;
-  text-align: start;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 30px;
 }
 
 .main-banner .caption h2 {
   margin-top: 30px;
-  margin-bottom: 25px;
-  font-size: 30px; /* tamaño del "apoyo morado" */
+  margin-bottom: 30px;
+  font-size: 38px; /* tamaño del "apoyo morado" */
   text-transform: uppercase;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
   font-weight: 200;
   color: #fff;
   letter-spacing: 1px;
@@ -782,7 +809,9 @@ banner
 }
 
 #gratis {
+  text-align: center;
   color: #ed563b;
+  margin-top: 20px;
 }
 
 /*
