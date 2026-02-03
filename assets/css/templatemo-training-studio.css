@@ -205,6 +205,29 @@ body {
   .mobile-bottom-fix-big {
     margin-bottom: 60px;
   }
+  /* Forzamos que todos los elementos de la lista pierdan márgenes laterales */
+    .header-area .nav li {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        text-align: center !important; /* Centrado absoluto */
+    }
+
+    /* Aseguramos que el primer elemento (Inicio) no tenga un trato especial */
+    .header-area .nav li:first-child {
+        border-top: none !important;
+        padding-top: 5px !important; /* Espacio con el borde superior del menú */
+    }
+
+    /* Estilo para los enlaces para que ocupen todo el ancho y sea fácil clickear */
+    .header-area .nav li a {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 15px 0px !important;
+        color: #2a2a2a !important; /* Color de texto del menú móvil */
+    }
 }
 
 .section-heading {
