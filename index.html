@@ -48,7 +48,9 @@
                         <!-- ***** Logo Start ***** -->
                         <a href="index.html" class="logo">
                           <span class="logo-full">TramitaFacil<em>Peru</em></span>
-                          <span class="logo-short">TF<em>P</em></span>
+                          <span class="logo-short">
+                            T<span class="smalll">ramita</span>F<span class="smalll">ácil</span><em>P<span id="smalll">erú</span></em>
+                          </span>
                           
                         </a>
                         <!-- ***** Logo End ***** -->
@@ -1024,6 +1026,26 @@
     
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Al hacer clic en cualquier enlace del menú
+            $('.nav li a').on('click', function() {
+                
+                // Solo actuamos si el botón de menú es visible (modo móvil)
+                if ($('.menu-trigger').is(':visible')) {
+                    
+                    // 1. Forzamos el cierre del menú desplegable
+                    $('.header-area .nav').slideUp(200);
+                    
+                    // 2. Esperamos un instante y reseteamos el botón (la X a 3 rayas)
+                    setTimeout(function() {
+                        $('.menu-trigger').removeClass('active');
+                    }, 50); 
+                }
+            });
+        });
+    </script>
+
 
   </body>
 </html>
