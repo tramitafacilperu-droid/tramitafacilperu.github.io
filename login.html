@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Tramita Fácil Perú</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-image: url(assets/images/uno_opaco.png);
+        background-color: #232d39; /* El color oscuro de tu web */
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        color: #fff;
+      }
+      .login-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        width: 100%;
+        max-width: 350px;
+      }
+      h2 {
+        color: #ed563b;
+        margin-bottom: 30px;
+      } /* El naranja de tu logo */
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: none;
+        background: #fff;
+        box-sizing: border-box;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #ed563b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      button:hover {
+        background-color: #f9735b;
+      }
+      .google-btn {
+        background-color: #fff;
+        color: #444;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-card">
+      <h2>TFP - Login</h2>
+      <input type="email" id="email" placeholder="Tu correo electrónico" />
+      <input type="password" id="password" placeholder="Tu contraseña" />
+      <button id="btnLogin">Ingresar</button>
+
+      <p style="margin: 20px 0; font-size: 0.8em; opacity: 0.5">— O —</p>
+
+      <button id="btnGoogle" class="google-btn">
+        <img
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg"
+          width="18"
+        />
+        Entrar con Google
+      </button>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+      // AQUÍ PEGA TU OBJETO firebaseConfig DE LA IMAGEN
+      const firebaseConfig = {
+        apiKey: "AIzaSyBu6mt6EtK-3k0WLXgSaTtovDrTBFm84IU",
+        authDomain: "tfperu-login.firebaseapp.com",
+        projectId: "tfperu-login",
+        storageBucket: "tfperu-login.firebasestorage.app",
+        messagingSenderId: "816878949079",
+        appId: "1:816878949079:web:34d2b5bef6b072423e1692",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Lógica de Login con Google
+      document.getElementById("btnGoogle").onclick = async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+          await signInWithPopup(auth, provider);
+          window.location.href = "index.html"; // Redirige al éxito
+        } catch (error) {
+          alert("Error con Google: " + error.message);
+        }
+      };
+
+      // Lógica de Login con Email (solo si el usuario ya existe)
+      document.getElementById("btnLogin").onclick = async () => {
+        const email = document.getElementById("email").value;
+        const pass = document.getElementById("password").value;
+        try {
+          await signInWithEmailAndPassword(auth, email, pass);
+          window.location.href = "index.html";
+        } catch (error) {
+          alert("Verifica tus datos: " + error.message);
+        }
+      };
+    </script>
+  </body>
+</html>
