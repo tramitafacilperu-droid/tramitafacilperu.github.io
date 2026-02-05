@@ -129,6 +129,22 @@
           }
         }
       };
+      
+      // Detectar "Enter" en el campo de correo para saltar a contraseña
+        document.getElementById('email').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+
+        // Detectar "Enter" en el campo de contraseña para hacer clic en Ingresar
+        document.getElementById('password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('btnLogin').click();
+            }
+        });
     </script>
   </body>
 </html>
