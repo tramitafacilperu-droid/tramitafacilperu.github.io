@@ -85,15 +85,14 @@
     </div>
 
     <script type="module">
+      // 1. IMPORTACIONES (Esto es lo que falta en tu captura)
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import {
         getAuth,
-        GoogleAuthProvider,
-        signInWithPopup,
         signInWithEmailAndPassword,
       } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-      // AQUÍ PEGA TU OBJETO firebaseConfig DE LA IMAGEN
+      // 2. CONFIGURACIÓN (Tu llave de acceso)
       const firebaseConfig = {
         apiKey: "AIzaSyBu6mt6EtK-3k0WLXgSaTtovDrTBFm84IU",
         authDomain: "tfperu-login.firebaseapp.com",
@@ -103,22 +102,11 @@
         appId: "1:816878949079:web:34d2b5bef6b072423e1692",
       };
 
+      // 3. INICIALIZACIÓN
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      // Lógica de Login con Google
-      document.getElementById("btnGoogle").onclick = async () => {
-        const provider = new GoogleAuthProvider();
-        try {
-          await signInWithPopup(auth, provider);
-          window.location.href = "index.html"; // Redirige al éxito
-        } catch (error) {
-          alert("Error con Google: " + error.message);
-        }
-      };
-
-      // Lógica de Login con Email (solo si el usuario ya existe)
-      // Busca esta parte en tu login.html y reemplázala:
+      // 4. LÓGICA DEL BOTÓN
       document.getElementById("btnLogin").onclick = async () => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("password").value;
@@ -129,13 +117,18 @@
         }
 
         try {
-          await signInWithEmailAndPassword(auth, email, pass);
-          // Si llega aquí, es que los datos son correctos
+          console.log("Intentando ingresar con:", email);
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            pass,
+          );
+          console.log("¡Éxito!", userCredential.user);
           alert("¡Acceso correcto! Bienvenido.");
           window.location.href = "index.html";
         } catch (error) {
-          // Esto te dirá exactamente por qué falla (ej: contraseña incorrecta)
-          console.error("Error detallado:", error.code);
+          console.error("Error completo:", error);
+          // Aquí verás el error si la contraseña está mal
           alert("Error al ingresar: " + error.message);
         }
       };
