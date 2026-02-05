@@ -60,13 +60,14 @@
                             <li class="scroll-to-section"><a href="#features">Vehicular</a></li>
                             <li class="scroll-to-section"><a href="#movil">movil</a></li>
                             <li class="scroll-to-section"><a href="#schedule">Ciudadano</a></li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contacto</a></li> 
+                            <li class="scroll-to-section"><a href="#contact-us">Contacto</a></li>
                             <li class="scroll-to-section">
-                                <a href="#" id="user-display" style="color: #ed563b !important; font-weight: bold; text-transform: lowercase;">
-                                    cargando...
+                                <a href="javascript:void(0)" id="btn-logout" style="color: #ed563b !important; font-weight: bold; font-size: 13px;">
+                                    <i class="fa fa-sign-out"></i> Salir
                                 </a>
-                            </li>
+                            </li>                            
                             <li class="main-button"><a href="https://wa.me/51902766874" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+                            
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -1055,7 +1056,7 @@
     </script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyBu6mt6EtK-3kOWLXgSaTTovDrTBFm84IU",
@@ -1069,7 +1070,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // ✅ ÚNICA FUENTE DE VERDAD
+        // ✅ ÚNICA FUENTE DE VERDAD: Lógica del Guardián
         onAuthStateChanged(auth, (user) => {
           if (user) {
             console.log("Sesión activa:", user.email);
@@ -1080,6 +1081,15 @@
             window.location.href = "login.html";
           }
         });
+        // --- LÓGICA DE CERRAR SESIÓN ---
+        document.getElementById('btn-logout').onclick = async () => {
+          try {
+            await signOut(auth);
+            window.location.href = "login.html";
+          } catch (error) {
+            console.error("Error al salir:", error);
+          }
+        };
         </script>
 
   </body>
