@@ -1054,41 +1054,33 @@
         });
     </script>
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBu6mt6EtK-3k0WLXgSaTtovDrTBFm84IU",
-        authDomain: "tfperu-login.firebaseapp.com",
-        projectId: "tfperu-login",
-        storageBucket: "tfperu-login.firebasestorage.app",
-        messagingSenderId: "816878949079",
-        appId: "1:816878949079:web:34d2b5bef6b072423e1692"
-      };
+        const firebaseConfig = {
+          apiKey: "AIzaSyBu6mt6EtK-3kOWLXgSaTTovDrTBFm84IU",
+          authDomain: "tfperu-login.firebaseapp.com",
+          projectId: "tfperu-login",
+          storageBucket: "tfperu-login.firebasestorage.app",
+          messagingSenderId: "816878949079",
+          appId: "1:816878949079:web:34d2b5bef6b072423e1692"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
 
-      // lógica del Guardián
-      onAuthStateChanged(auth, (user) => {
+        // ✅ ÚNICA FUENTE DE VERDAD
+        onAuthStateChanged(auth, (user) => {
           if (user) {
-              // SI HAY USUARIO: Todo bien, mostramos el correo
-              console.log("Sesión activa:", user.email);
-              const userInfo = document.getElementById('user-display');
-              if (userInfo) userInfo.innerText = user.email;
+            console.log("Sesión activa:", user.email);
+            const userInfo = document.getElementById("user-info-display");
+            if (userInfo) userInfo.textContent = user.email;
           } else {
-              // SI NO HAY USUARIO: Esperamos 2 segundos antes de echarlo
-              // Esto evita el "rebote" injusto durante la carga
-              console.log("Verificando credenciales...");
-              
-              setTimeout(() => {
-                  // Solo si después de 2 segundos sigue sin haber usuario, lo mandamos al login
-                  if (!auth.currentUser) {
-                      window.location.href = "login.html";
-                  }
-              }, 2000); 
+            console.log("No hay sesión, redirigiendo...");
+            window.location.href = "login.html";
           }
-      });
-    </script>
+        });
+        </script>
+
   </body>
 </html>

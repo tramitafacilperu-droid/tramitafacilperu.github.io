@@ -108,11 +108,7 @@
 
         try {
           await signInWithEmailAndPassword(auth, email, pass);
-          alert("¡Acceso correcto! Bienvenido.");
-          // Damos un segundo para que el navegador guarde el "token" de sesión
-          setTimeout(() => {
-            window.location.href = "index.html";
-          }, 1000);
+          window.location.href = "index.html";
         } catch (error) {
           console.error("Error:", error.code);
           if (error.code === "auth/invalid-credential") {
