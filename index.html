@@ -21,29 +21,45 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-  // Tu configuración de "tfperu-login"
-  const firebaseConfig = {
-    apiKey: "AIzaSyBu6mt6EtK-3k0WLXgSaTtovDrTBFm84IU",
-    authDomain: "tfperu-login.firebaseapp.com",
-    projectId: "tfperu-login",
-    storageBucket: "tfperu-login.firebasestorage.app",
-    messagingSenderId: "816878949079",
-    appId: "1:816878949079:web:34d2b5bef6b072423e1692"
-  };
+      const firebaseConfig = {
+        apiKey: "AIzaSyBu6mt6EtK-3k0WLXgSaTtovDrTBFm84IU",
+        authDomain: "tfperu-login.firebaseapp.com",
+        projectId: "tfperu-login",
+        storageBucket: "tfperu-login.firebasestorage.app",
+        messagingSenderId: "816878949079",
+        appId: "1:816878949079:web:34d2b5bef6b072423e1692"
+      };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
 
-  // El Guardián: Si no hay usuario activo, rebota a login.html
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "login.html";
-    }
-  });
-</script>
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          window.location.href = "login.html";
+        } else {
+          console.log("Usuario autenticado:", user.email);
+          // Aquí podrías mostrar un "Hola, " + user.email en tu web
+        }
+      });
+      // Detectar "Enter" en el campo de correo para saltar a contraseña
+        document.getElementById('email').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+
+        // Detectar "Enter" en el campo de contraseña para hacer clic en Ingresar
+        document.getElementById('password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('btnLogin').click();
+            }
+        });
+    </script>
 
     </head>
     
