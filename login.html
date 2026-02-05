@@ -85,16 +85,16 @@
     </div>
 
     <script type="module">
-      // 1. IMPORTACIONES (Esto es lo que falta en tu captura)
+      // 1. IMPORTACIONES
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import {
         getAuth,
         signInWithEmailAndPassword,
       } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-      // 2. CONFIGURACIÓN (Tu llave de acceso)
+      // 2. CONFIGURACIÓN
       const firebaseConfig = {
-        apiKey: "AIzaSyBu6mt6EtK-3k0WLXgSaTtovDrTBFm84IU",
+        apiKey: "AIzaSyBu6mt6EtK-3kOWLXgSaTTovDrTBFm84IU",
         authDomain: "tfperu-login.firebaseapp.com",
         projectId: "tfperu-login",
         storageBucket: "tfperu-login.firebasestorage.app",
@@ -106,9 +106,9 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      // 4. LÓGICA DEL BOTÓN
+      // 4. LÓGICA DE LOGIN
       document.getElementById("btnLogin").onclick = async () => {
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email").value.trim();
         const pass = document.getElementById("password").value;
 
         if (!email || !pass) {
@@ -117,19 +117,16 @@
         }
 
         try {
-          console.log("Intentando ingresar con:", email);
-          const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email,
-            pass,
-          );
-          console.log("¡Éxito!", userCredential.user);
+          await signInWithEmailAndPassword(auth, email, pass);
           alert("¡Acceso correcto! Bienvenido.");
           window.location.href = "index.html";
         } catch (error) {
-          console.error("Error completo:", error);
-          // Aquí verás el error si la contraseña está mal
-          alert("Error al ingresar: " + error.message);
+          console.error("Error:", error.code);
+          if (error.code === "auth/invalid-credential") {
+            alert("Correo o contraseña incorrectos.");
+          } else {
+            alert("Error: " + error.message);
+          }
         }
       };
     </script>
