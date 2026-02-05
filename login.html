@@ -109,7 +109,10 @@
         try {
           await signInWithEmailAndPassword(auth, email, pass);
           alert("¡Acceso correcto! Bienvenido.");
-          window.location.href = "index.html";
+          // Damos un segundo para que el navegador guarde el "token" de sesión
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1000);
         } catch (error) {
           console.error("Error:", error.code);
           if (error.code === "auth/invalid-credential") {
@@ -119,22 +122,22 @@
           }
         }
       };
-      
-      // Detectar "Enter" en el campo de correo para saltar a contraseña
-        document.getElementById('email').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('password').focus();
-            }
-        });
 
-        // Detectar "Enter" en el campo de contraseña para hacer clic en Ingresar
-        document.getElementById('password').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('btnLogin').click();
-            }
-        });
+      // Detectar "Enter" en el campo de correo para saltar a contraseña
+      document.getElementById("email").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          document.getElementById("password").focus();
+        }
+      });
+
+      // Detectar "Enter" en el campo de contraseña para hacer clic en Ingresar
+      document.getElementById("password").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          document.getElementById("btnLogin").click();
+        }
+      });
     </script>
   </body>
 </html>
