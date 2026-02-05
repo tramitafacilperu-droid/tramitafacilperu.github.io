@@ -61,6 +61,11 @@
                             <li class="scroll-to-section"><a href="#movil">movil</a></li>
                             <li class="scroll-to-section"><a href="#schedule">Ciudadano</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contacto</a></li> 
+                            <li class="scroll-to-section">
+    <a href="#" id="user-display" style="color: #ed563b !important; font-weight: bold; text-transform: lowercase;">
+        cargando...
+    </a>
+</li>
                             <li class="main-button"><a href="https://wa.me/51902766874" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
                         </ul>        
                         <a class='menu-trigger'>
@@ -1064,21 +1069,29 @@
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
 
-      // El Guardián mejorado
+      // En index.html - Reemplaza la sección del guardián
+      let isInitialLoad = true;
+
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log("Sesión activa:", user.email);
-          // Opcional: mostrar nombre en pantalla
+          console.log("Sesión confirmada:", user.email);
           const userInfo = document.getElementById('user-display');
           if(userInfo) userInfo.innerText = user.email;
+          isInitialLoad = false;
         } else {
-          // Solo redirige si después de verificar estamos seguros de que no hay usuario
-          console.log("No hay sesión, redirigiendo...");
-          window.location.href = "login.html";
+          // Si no hay usuario, solo redirigimos si no es el instante de carga inicial
+          // o si realmente la sesión se cerró.
+          console.log("Verificando sesión...");
+          
+          // Damos un margen de 1 segundo para que Firebase recupere la sesión del navegador
+          setTimeout(() => {
+              if (!auth.currentUser) {
+                  console.log("No hay sesión activa, redirigiendo a login...");
+                  window.location.href = "login.html";
+              }
+          }, 1000); 
         }
       });
     </script>
-
-
   </body>
 </html>
