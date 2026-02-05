@@ -118,14 +118,25 @@
       };
 
       // Lógica de Login con Email (solo si el usuario ya existe)
+      // Busca esta parte en tu login.html y reemplázala:
       document.getElementById("btnLogin").onclick = async () => {
         const email = document.getElementById("email").value;
         const pass = document.getElementById("password").value;
+
+        if (!email || !pass) {
+          alert("Por favor, completa todos los campos.");
+          return;
+        }
+
         try {
           await signInWithEmailAndPassword(auth, email, pass);
+          // Si llega aquí, es que los datos son correctos
+          alert("¡Acceso correcto! Bienvenido.");
           window.location.href = "index.html";
         } catch (error) {
-          alert("Verifica tus datos: " + error.message);
+          // Esto te dirá exactamente por qué falla (ej: contraseña incorrecta)
+          console.error("Error detallado:", error.code);
+          alert("Error al ingresar: " + error.message);
         }
       };
     </script>
