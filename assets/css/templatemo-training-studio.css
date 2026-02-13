@@ -895,14 +895,13 @@ a.card-link:hover .logo-icon img {
   text-align: left;
   display: flex;
   flex-direction: column;
-  
 }
 
-.card-text .brand{
+.card-text .brand {
   font-weight: 600;
   text-transform: uppercase;
 }
-.card-text .label{
+.card-text .label {
   font-weight: 400;
   text-transform: capitalize;
 }
